@@ -1,2 +1,0 @@
-ic/doc/RecentlyUsedListTests.java
- ic.doc.RecentlyUsedListTests
