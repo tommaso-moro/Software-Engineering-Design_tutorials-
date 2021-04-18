@@ -10,11 +10,11 @@ import org.junit.Test;
 
 public class FibonacciSequenceTest {
 
-  final FibonacciSequence sequence = new FibonacciSequence();
+  FibonacciSequence fibonacciSequence = new FibonacciSequence();
+  ArithmeticSequence sequence = new ArithmeticSequence(fibonacciSequence);
 
   @Test
   public void definesFirstTwoTermsToBeOne() {
-
     assertThat(sequence.term(0), is(1));
     assertThat(sequence.term(1), is(1));
   }
@@ -29,7 +29,6 @@ public class FibonacciSequenceTest {
 
   @Test
   public void isUndefinedForNegativeIndices() {
-
     try {
       sequence.term(-1);
       fail("should have thrown exception");
