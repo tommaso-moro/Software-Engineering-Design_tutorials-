@@ -7,17 +7,25 @@ import static ic.doc.catalogues.QueryParser.publishedBeforeFrom;
 import static ic.doc.catalogues.QueryParser.titleFrom;
 
 import ic.doc.Book;
+
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class BritishLibraryCatalogue {
+public class BritishLibraryCatalogue implements LibraryCatalogue {
+
+  private static final BritishLibraryCatalogue instance = new BritishLibraryCatalogue();
 
   // imagine that each new instance of this object uses more than 500MB of RAM
 
+  public static BritishLibraryCatalogue getInstance() {
+    return instance;
+  }
+
   private final Collection<Book> catalogue = allTheBooks();
 
+  @Override
   public List<Book> searchFor(String query) {
     return catalogue.stream()
         .filter(book -> book.matchesAuthor(lastNameFrom(query)))
@@ -29,7 +37,8 @@ public class BritishLibraryCatalogue {
   }
 
 
-  private Collection<Book> allTheBooks() {
+  @Override
+  public Collection<Book> allTheBooks() {
 
     System.out.println("Memory Usage: 500MB...");
 
