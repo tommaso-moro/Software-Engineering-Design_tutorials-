@@ -1,0 +1,3 @@
+We did not cover this material this year, so I will not do Q4
+
+However, if I were to do it Q4 I would have to use the Adaptern Patternm which relates to the Ports and Adapters (or "Hexagonal") architectural style.

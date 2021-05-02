@@ -5,6 +5,11 @@ import java.util.Arrays;
 import java.util.List;
 
 public abstract class CodeFormatter {
+  private CodeFormattable codeFormattable;
+
+  public CodeFormatter(CodeFormattable codeFormattable) {
+    this.codeFormattable = codeFormattable;
+  }
 
   public String format(String source) {
 
@@ -30,9 +35,13 @@ public abstract class CodeFormatter {
     return String.join("\n", indentedCode);
   }
 
-  protected abstract List<String> startOfBlock();
+  protected List<String> startOfBlock() {
+    return codeFormattable.startOfBlock();
+  };
 
-  protected abstract String endOfBlock();
+  protected String endOfBlock() {
+    return codeFormattable.endOfBlock();
+  };
 
   private String indentBy(int num, WhiteSpace whiteSpace, String line) {
     String indent = "";
@@ -50,6 +59,8 @@ public abstract class CodeFormatter {
     return source.trim();
   }
 
-  protected abstract WhiteSpace tabsOrSpaces();
+  protected WhiteSpace tabsOrSpaces() {
+    return codeFormattable.tabsOrSpaces();
+  };
 
 }

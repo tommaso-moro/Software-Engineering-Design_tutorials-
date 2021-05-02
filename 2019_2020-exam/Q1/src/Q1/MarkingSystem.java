@@ -5,7 +5,13 @@ import java.util.Map;
 
 public class MarkingSystem {
 
+
+  private static final MarkingSystem instance = new MarkingSystem();
   private final Map<Student, StudentRecord> allStudentMarks;
+
+  public static MarkingSystem getInstance() {
+    return instance;
+  }
 
   public MarkingSystem() {
     allStudentMarks = new HashMap<>();

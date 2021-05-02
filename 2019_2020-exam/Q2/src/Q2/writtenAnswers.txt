@@ -1,0 +1,14 @@
+Q2)A)
+The code follows a Template Method Pattern
+
+Q2)B)
+An alternative pattern for factoring out duplication between the classes would be the strategy pattern
+
+Q2)C)
+Done (created interface "CodeFormattable" etc, see code)
+
+Q2)D)
+I don't think any of the two is necessarily much better than the other here. I would probably pick the strategy pattern because I feel like that way it's easier to maintain the codebase
+once it gets larger: the common behavior of all CodeFormattable classes can be defined in CodeFormatter and then one only needs to implement class-specific behaviors
+in the individual classes (e.g. JavaCodeFormatter). The fact that the individual classes have to implement an interface gives a well-defined and clear structure
+to the code and I think it ensures consistency across all of the classes which is especially crucial once the codebase grows and we start having many of them

@@ -1,0 +1,14 @@
+ANSWER TO Q1)A)
+the Singleton Pattern
+
+ANSWER TO Q1)C)
+The way I implemented the Singleton Pattern in MarkingSystem implies that the singleton object gets created automatically when a MarkingSystem is created
+We could go for the "lazy" approach and not construct the object until someone calls "getInstance()" explicitly.
+To do that we would make the "MarkingSystem instance" data member non-final, and set up a "getInstance()" method in Marking System that would check if this-instance
+is null (i.e. if the instance already exists) and if not would create it. In this case, we would make the getInstance() method *synchronized* in order to avoid
+the scenario in which two threads simultaneously access the "if (this.instance == null)" condition and thus create two instances. By making the method synchronized, we are
+locking the method in a way that makes sure that only one instance gets created.
+
+ANSWER TO Q1)D)
+The pattern I implemented is arguably easier to implement, however it has the downside that the object is created automatically, which is something that
+might be quite expensive if the object is a large one.

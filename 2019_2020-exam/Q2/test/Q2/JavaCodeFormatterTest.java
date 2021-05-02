@@ -6,7 +6,8 @@ import static org.junit.Assert.assertEquals;
 
 public class JavaCodeFormatterTest {
 
-    CodeFormatter javaFormatter = new JavaCodeFormatter();
+        CodeFormatter javaFormatter = new CodeFormatter(new JavaCodeFormatter()) {
+        };
 
     @Test
     public void doesNotIndentSingleLine(){
