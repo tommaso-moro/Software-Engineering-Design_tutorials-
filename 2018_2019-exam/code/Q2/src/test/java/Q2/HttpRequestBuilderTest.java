@@ -1,5 +1,7 @@
 package Q2;
 
+import static Q2.HttpRequestBuilder.*;
+
 import org.junit.Test;
 
 import java.util.ArrayList;

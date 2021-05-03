@@ -9,7 +9,7 @@ public class HttpRequestBuilder {
     private HttpRequest.Method method;
     private List<String> headers;
 
-    public HttpRequestBuilder HttpRequest() {
+    public HttpRequestBuilder aHttpRequest() {
         return new HttpRequestBuilder();
     }
 

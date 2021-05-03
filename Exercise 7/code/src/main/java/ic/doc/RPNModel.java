@@ -1,53 +1,26 @@
 package ic.doc;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Stack;
-
-import static java.lang.String.valueOf;
 
 class RPNModel {
     private Stack<Integer> stack = new Stack<Integer>();
-    private final RPNGuiApp rpnGuiApp;
     private boolean binaryOperationAllowed = false;
+    private List<Updatable> observers = new ArrayList<Updatable>();
 
-    public RPNModel(RPNGuiApp rpnGuiApp) {
-        this.rpnGuiApp = rpnGuiApp;
-    }
     public RPNModel() {};
 
-    public void performSubtraction() {
-        if (binaryOperationAllowed) {   int operand1 = (int) stack.pop();
-            int operand2 = (int) stack.pop();
-            int result = operand1 - operand2;
-            updateTextField(result);
-            rpnGuiApp.textField.setText(valueOf(result));
+    public void addObserver(Updatable observer) {
+        observers.add(observer);
+    }
 
-            updateBinaryOperationIsAllowed();
-        } else {
-            updateTextField("Not enough args for '-'");
+    private void updateObservers(Object value) {
+        for (Updatable observer : observers) {
+            observer.update(value);
         }
     }
 
-    public void performAddition() {
-        if (binaryOperationAllowed) {
-            int operand1 = stack.pop();
-            int operand2 = stack.pop();
-            int result = operand1 + operand2;
-            stack.push(result);
-            updateTextField(result);
-            updateBinaryOperationIsAllowed();
-        } else {
-            updateTextField("Not enough args for '+'");
-        }
-
-    }
-
-    public void updateTextField(int value) {
-        rpnGuiApp.textField.setText(valueOf(value));
-    }
-
-    public void updateTextField(String value) {
-        rpnGuiApp.textField.setText(value);
-    }
 
     public void updateBinaryOperationIsAllowed() {
         if (stack.size() < 2) {
@@ -61,5 +34,17 @@ class RPNModel {
     public void addValue(int value) {
         stack.push(value);
         updateBinaryOperationIsAllowed();
+        updateObservers(value);
+    }
+
+    public void performOperation(RPNGuiApp.Operator operator) {
+        if (binaryOperationAllowed) {
+            int result = operator.apply(stack.pop(), stack.pop());
+            stack.push(result);
+            updateObservers(result);
+            updateBinaryOperationIsAllowed();
+        } else {
+            updateObservers("No enough args for '" + operator.getLabel() + "' operation");
+        }
     }
 }
