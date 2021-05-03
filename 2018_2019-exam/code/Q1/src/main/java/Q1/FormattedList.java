@@ -4,7 +4,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public abstract class FormattedList {
+public class FormattedList {
+    private FormattableList formattableList;
+    private String[] items;
+
+    public FormattedList(FormattableList formattableList, String... items) {
+        this.formattableList = formattableList;
+        this.items = items;
+    }
 
     private List<String> content = new ArrayList<>();
 
@@ -24,11 +31,17 @@ public abstract class FormattedList {
         System.out.println(formatFooter());
     }
 
-    protected abstract String formatHeader();
+    protected String formatHeader() {
+        return formattableList.formatHeader();
+    };
 
-    protected abstract String formatItem(String item);
+    protected String formatItem(String item) {
+        return formattableList.formatItem(item);
+    };
 
-    protected abstract String formatFooter();
+    protected String formatFooter() {
+        return formattableList.formatFooter();
+    };
 
 }
 

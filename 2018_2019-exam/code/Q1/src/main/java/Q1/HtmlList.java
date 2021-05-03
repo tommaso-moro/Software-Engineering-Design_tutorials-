@@ -1,23 +1,19 @@
 package Q1;
 
-public class HtmlList extends FormattedList {
-
-    public HtmlList(String... items) {
-        super(items);
-    }
+public class HtmlList extends FormattedList implements FormattableList {
 
     @Override
-    protected String formatHeader() {
+    public String formatHeader() {
         return "<ul>";
     }
 
     @Override
-    protected String formatItem(String item) {
+    public String formatItem(String item) {
         return "  <li>" + item + "</li>";
     }
 
     @Override
-    protected String formatFooter() {
+    public String formatFooter() {
         return "</ul>";
     }
 }

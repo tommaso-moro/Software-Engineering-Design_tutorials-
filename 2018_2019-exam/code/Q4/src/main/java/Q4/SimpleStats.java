@@ -11,42 +11,43 @@ public class SimpleStats {
   private final List<Integer> numbers = new ArrayList<>();
   private int max;
   private double mean;
+  JFrame frame = new JFrame("Simple Stats");
+  JPanel panel = new JPanel();
+  JTextField currentMaxTextField = new JTextField(11);
+  JTextField currentMeanTextField = new JTextField(11);
+  SimpleStatsModel simpleStatsModel = new SimpleStatsModel();
 
-  private void display() {
-
-    JFrame frame = new JFrame("Simple Stats");
+  public SimpleStats() {
     frame.setSize(250, 350);
-
-    JPanel panel = new JPanel();
-
-    JTextField currentMax = new JTextField(11);
-    JTextField currentMean = new JTextField(11);
-
     panel.add(new JLabel("Max: value "));
-    panel.add(currentMax);
+    panel.add(currentMaxTextField);
     panel.add(new JLabel("Mean: value "));
-    panel.add(currentMean);
+    panel.add(currentMeanTextField);
+    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+  }
+
+  // VIEW
+  private void display() {
 
     for (int i = 1; i <= 12; i++) {
       final int n = i;
       JButton button = new JButton(String.valueOf(i));
-      button.addActionListener(new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-          numbers.add(n);
-          max = Math.max(max, n);
-          mean = numbers.stream().mapToInt(val -> val).average().orElse(0.0);
-          currentMax.setText(String.valueOf(max));
-          currentMean.setText(String.valueOf(mean));
-        }
-      });
+      button.addActionListener(e -> handleBtnPressed(n));
       panel.add(button);
     }
 
     frame.getContentPane().add(panel);
-
-    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     frame.setVisible(true);
+
+  }
+
+  //CONTROLLER
+  private void handleBtnPressed(int n) {
+    simpleStatsModel.addNumber(n);
+    max = simpleStatsModel.getMax();
+    mean = simpleStatsModel.getNumbersMean();
+    currentMaxTextField.setText(String.valueOf(max));
+    currentMeanTextField.setText(String.valueOf(mean));
   }
 
   public static void main(String[] args) {

@@ -1,0 +1,3 @@
+Q4)A)
+i) Separation of concern -> code is easier to manage and scale because the Model, View, and Controller are separate and dealing with separate things.
+ii) The model can be tested in isolation, no need for View of Controller to test the model

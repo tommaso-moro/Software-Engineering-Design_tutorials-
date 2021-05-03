@@ -1,23 +1,19 @@
 package Q1;
 
-public class LaTeXList extends FormattedList {
-
-    public LaTeXList(String... items) {
-        super(items);
-    }
+public class LaTeXList extends FormattedList implements FormattableList {
 
     @Override
-    protected String formatHeader() {
+    public String formatHeader() {
         return "\\begin{itemize}";
     }
 
     @Override
-    protected String formatItem(String item) {
+    public String formatItem(String item) {
         return "  \\item " + item;
     }
 
     @Override
-    protected String formatFooter() {
+    public String formatFooter() {
         return "\\end{itemize}";
     }
 }
